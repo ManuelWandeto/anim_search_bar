@@ -39,12 +39,13 @@ class AnimSearchBar extends StatefulWidget {
   final List<TextInputFormatter>? inputFormatters;
   final bool boxShadow;
   final Function(String) onSubmitted;
-
+  final FocusNode focusNode;
   const AnimSearchBar({
     Key? key,
 
     /// The width cannot be null
     required this.width,
+    required this.focusNode,
 
     /// The textController cannot be null
     required this.textController,
@@ -105,11 +106,12 @@ class _AnimSearchBarState extends State<AnimSearchBar>
     with SingleTickerProviderStateMixin {
   ///initializing the AnimationController
   late AnimationController _con;
-  FocusNode focusNode = FocusNode();
+  late FocusNode focusNode;
 
   @override
   void initState() {
     super.initState();
+    focusNode = widget.focusNode;
 
     ///Initializing the animationController which is responsible for the expanding and shrinking of the search bar
     _con = AnimationController(
